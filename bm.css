@@ -1,0 +1,74 @@
+.cell {
+    text-align: center;
+    border: 1px solid black;
+    float: left;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    font-size: 250%;
+    cursor: pointer;
+    cursor: hand;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.cell-blank {
+    background-color: grey;
+    border: 1px solid grey;
+    float: left;
+    height: 100px;
+    width: 100px;
+    //outline: 1px solid black;
+}
+
+#grid {
+    margin-top: 20px;
+    margin-left: 5px;
+    background-color: grey;
+}
+
+.hidden {
+    //display: none !important;
+    opacity: 0 !important;
+}
+
+.error-msg, .warning-msg, .info-msg, .success-msg {
+    background-color: #b30000;
+    border: 1px solid grey;
+    border-radius: 5px;
+    opacity: 1;
+
+    color: white;
+    text-shadow: 1px 1px 0 #444;
+    font-family: "Verdana";
+    font-weight: bold;
+
+    width: 40%;
+    height: 30px;
+    line-height: 30px;
+
+    position: fixed;
+    top: 3px;
+    right: 3px;
+    display: block;
+    text-align: center;
+    z-index: 999;
+
+    transition: all .5s ease-out;
+}
+
+.error-msg{
+    background-color: #b30000;
+}
+
+.warning-msg {
+    background-color: #ffd11a;
+}
+
+.info-msg {
+    background-color: #4d79ff;
+}
+
+.success-msg {
+    background-color: #47d147;
+}
