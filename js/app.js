@@ -3,11 +3,12 @@
 	function BoardManagerController(dim){
 		this.dim = dim;
 		this.maxValue = (this.dim * this.dim) - 1;
+		this.mtxArray = [];
 	}
 
 	BoardManagerController.prototype = {
 		constructor: BoardManagerController,
-		getMtx: function(){
+		generateMtx: function(){
 			var mtx = [];
 			var possibleValues = this.getPossibleValues();
 			for(var i=0; i < this.dim; i++){
@@ -15,9 +16,31 @@
 				for(var j=0; j < this.dim; j++){
 					var rnd_idx = Math.floor(Math.random() * possibleValues.length);
 					mtx[i][j] = possibleValues.splice(rnd_idx, 1)[0];
+					this.mtxArray.push(mtx[i][j]);
 				}
 			}
 			return mtx;
+		},
+		getMtx: function(){
+			var mtx = this.generateMtx();
+			while (!this.isSolvable(mtx)) {
+				mtx = this.generateMtx();
+			}
+			return mtx;
+		},
+		isSolvable: function(mtx){
+			var inversionCnt = 0;
+			for(var i=0; i<this.mtxArray.length-2; i++){
+				for(var j=i+1; j<this.mtxArray.length-i-1; j++){
+					if (this.mtxArray[i] === '' || this.mtxArray[j] === '') {
+						break;
+					}
+					if( this.mtxArray[i]>this.mtxArray[j] ) {
+						inversionCnt += 1;
+					}
+				}
+			}
+			return inversionCnt % 2 === 0 ? true : false;
 		},
 		getPossibleValues: function(){
 			var values = [];
@@ -102,7 +125,6 @@
 			}
 		},
 		isComplete: function(bmv){
-			console.debug();
 			var previousValue = 0;
 			for(var row in bmv.mtx){
 				for(var item in bmv.mtx[row]){
