@@ -10,6 +10,7 @@
 		constructor: BoardManagerController,
 		generateMtx: function(){
 			var mtx = [];
+			this.mtxArray = [];
 			var possibleValues = this.getPossibleValues();
 			for(var i=0; i < this.dim; i++){
 				mtx.push([]);
@@ -23,15 +24,15 @@
 		},
 		getMtx: function(){
 			var mtx = this.generateMtx();
-			while (!this.isSolvable(mtx)) {
+			while (!this.isSolvable()) {
 				mtx = this.generateMtx();
 			}
 			return mtx;
 		},
-		isSolvable: function(mtx){
+		isSolvable: function(){
 			var inversionCnt = 0;
-			for(var i=0; i<this.mtxArray.length-2; i++){
-				for(var j=i+1; j<this.mtxArray.length-i-1; j++){
+			for(var i=0; i<this.mtxArray.length-1; i++){
+				for(var j=i+1; j<this.mtxArray.length; j++){
 					if (this.mtxArray[i] === '' || this.mtxArray[j] === '') {
 						break;
 					}
